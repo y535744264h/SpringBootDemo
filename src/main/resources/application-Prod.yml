@@ -1,0 +1,10 @@
+#第二种设置方式.yml文件
+server:
+  port: 8089
+  context-path: /demo
+
+student:
+  name: User
+  age: 11
+
+testString: aaaa

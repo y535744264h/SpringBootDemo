@@ -1,0 +1,73 @@
+#第二种设置方式.yml文件
+server:
+  port: 8089
+  context-path: /demo
+
+student:
+  name: yanhao
+  age: 11
+
+
+
+testString: aaaa
+# 数据库访问配置
+# 主数据源，默认的
+
+
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    data-username: root
+    data-password: yh
+    #-----------以下内容非必填---------------
+    #下面为连接池的补充设置，应用到上面所有数据源中
+    dbcp:
+      #初始化大小
+      initial-size: 5
+      #最小
+      min-idle: 5
+      #最大
+      max-active: 20
+      #配置获取连接等待超时的时间
+      max-wait: 6000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: select 1 from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache,并且制定每个连接上PCCache的大小
+      pool-prepared-statements: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,log4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      #---------------------------------------
+  jpa:
+    hibernate:
+      #每次启动创建一个新的表，如果有删掉
+      #ddl-auto: create
+      #如果没有创建，有的话不删除
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+
+#mybatis配置
+mybatis:
+  #mapper文件的位置
+  mapper-locations: classpath:Mybatis-sql/*.xml
+  #为实体对象所在的包，跟数据库表一一对应
+  type-aliases-package: springbootdemo.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
